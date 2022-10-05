@@ -14,7 +14,7 @@ hbs.registerPartials(partialsPath)
 //  template engine root
 app.get('/', (req, res) => {
     res.render('index', {
-        anshu: "anshu sharma ",
+        anshu: "anshu sharma",
     })
 })
 app.get('/about', (req, res) => {
