@@ -2,15 +2,18 @@ const express = require("express")
 const app = express()
 const path = require("path")
 const staticPath = path.join(__dirname, '/public')
-const hbs = require('hbs');
+const templatePath = path.join(__dirname,'templates')
 
 app.use(express.static(staticPath))
 //  we hav eto set view engine 
 app.set('view engine', 'hbs');
+
+app.set('views',templatePath)
+
 //  template engine root
 
 app.get('/a', (req, res) => {
-    res.render('index',{
+    res.render('index', {
         anshu: "anshu sharma "
     })
 })
