@@ -5,6 +5,8 @@ const staticPath = path.join(__dirname, '/public')
 const templatePath = path.join(__dirname, 'templates/views')
 const partialsPath = path.join(__dirname, 'templates/partials')
 const hbs = require('hbs')
+const requests = require('requests');
+
 app.use(express.static(staticPath))
 //  we hav eto set view engine 
 app.set('view engine', 'hbs');
@@ -34,6 +36,21 @@ app.get('/about/*', (req, res) => {
         errorComment: req.url,
     })
 })
+
+app.get('/temp', (req, res) => {
+    requests(`https://api.openweathermap.org/data/2.5/weather?q=${req.query.city}&appid=73e9e071126b8ffcf66230bc196f5df5`,)
+        .on('data', function (chunk) {
+            const Pdata = JSON.parse(chunk)
+            res.send(`the temp in ${req.query.city} is ${Pdata.main.temp} `)
+            console.log(Pdata.main.temp)
+
+        })
+        .on('end', function (err) {
+            if (err) return console.log('connection closed due to errors', err);
+            console.log('end');
+        });
+})
+
 //  404 page using hbs page
 app.get('*', (req, res) => {
     res.render('404', {
