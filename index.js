@@ -6,6 +6,8 @@ const templatePath = path.join(__dirname, 'templates/views')
 const partialsPath = path.join(__dirname, 'templates/partials')
 const hbs = require('hbs')
 const requests = require('requests');
+const studentRoute = require('./router/student');
+app.use(studentRoute)
 
 app.use(express.static(staticPath))
 //  we hav eto set view engine 
