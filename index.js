@@ -18,12 +18,20 @@ app.get('/', (req, res) => {
     })
 })
 app.get('/about', (req, res) => {
-    res.render('about')
+    res.render('about', {
+        name: req.query.name,
+        surname: req.query.surname
+
+    })
+    // ? is query string and after that are  parameter 
+    // & sign is use to separate  parameters var 
+    // http://localhost:3000/about/?name=anshu&surnam=sharma
+    console.log(req.query);
 })
 
 app.get('/about/*', (req, res) => {
     res.render('404', {
-        errorComment: req.url
+        errorComment: req.url,
     })
 })
 //  404 page using hbs page
