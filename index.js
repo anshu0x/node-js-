@@ -20,6 +20,18 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about')
 })
+
+app.get('/about/*', (req, res) => {
+    res.render('404', {
+        errorComment: req.url
+    })
+})
+//  404 page using hbs page
+app.get('*', (req, res) => {
+    res.render('404', {
+        errorComment: req.url
+    })
+})
 //  it will not show because the connection was already closed  
 
 app.listen(3000, () => {
